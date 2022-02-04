@@ -1,5 +1,3 @@
-const COUNT_LEVELS = 5;
-
 function GetSymbolsByCount(count, symbol = " ") {
     let symbols = "";
 
@@ -22,50 +20,67 @@ function GetRombCount(count, index) {
     let mediana = GetMediana(count);
 
     let res = index > mediana ? mediana - (index - mediana) : index;
+    res = count % 2 == 0 && index > mediana ? res + 1 : res;
 
     return res;
 }
 
-const COUNT_SHAPES = 3;
-const SPACE_BETWEN = 1;
-const PRIMARY_SYMBOL = "*";
-const GAP_SYMBOL = " ";
+function PrintShapes(countLevels = 5, spaceBetween = 1, primarySymbol = "*", gapSymbol = " ") {
+    // let countLevels = 10;
+    // const spaceBetween = 5;
+    // const primarySymbol = "*";
+    // const gapSymbol = " ";
 
-for (let i = 1; i <= COUNT_LEVELS; i++) {
-    let firstShapeFloor = i;
-    let secondShapeFloor = i;
-    let thirdShapeFloor = i;
+    // const COUNT_SHAPES = 3;
+    for (let i = 1; i <= countLevels; i++) {
+        let firstShapeFloor = i;
+        let secondShapeFloor = i;
+        let thirdShapeFloor = i;
 
-    let firstGapsCount =
-        COUNT_LEVELS * 2 + SPACE_BETWEN - firstShapeFloor - secondShapeFloor;
-    let secondGapsCount =
-        secondShapeFloor < GetMediana(COUNT_LEVELS) ?
-        firstGapsCount :
-        COUNT_LEVELS;
+        let firstGapsCount =
+            countLevels * 2 +
+            spaceBetween -
+            firstShapeFloor -
+            secondShapeFloor;
 
-    let firstShapeCount = firstShapeFloor;
-    let secondShapeCount = GetFloorLength(secondShapeFloor);
+        let secondGapsCount =
+            secondShapeFloor <= GetMediana(countLevels) ?
+            firstGapsCount :
+            countLevels + spaceBetween - 1;
 
-    let thirdRombCount = GetRombCount(COUNT_LEVELS, thirdShapeFloor);
-    let thirdShapeCount = GetFloorLength(thirdRombCount);
+        let firstShapeCount = firstShapeFloor;
+        let secondShapeCount = GetFloorLength(secondShapeFloor);
 
-    let firstShapeSymbols = GetSymbolsByCount(firstShapeCount, PRIMARY_SYMBOL);
-    let secondShapeSymbols = GetSymbolsByCount(
-        secondShapeCount,
-        PRIMARY_SYMBOL
-    );
-    let thirdShapeSymbols = GetSymbolsByCount(thirdShapeCount, PRIMARY_SYMBOL);
-    let firstGapSymbols = GetSymbolsByCount(firstGapsCount, GAP_SYMBOL);
-    let secondGapSymbolos = GetSymbolsByCount(secondGapsCount, GAP_SYMBOL);
+        let thirdRombCount = GetRombCount(countLevels, thirdShapeFloor);
+        let thirdShapeCount = GetFloorLength(thirdRombCount);
+        // let thirdShapeCount = thirdRombCount
 
-    console.log(
-        firstShapeSymbols,
-        firstGapSymbols,
-        secondShapeSymbols,
-        secondGapSymbolos,
-        thirdShapeSymbols
-    );
+        let firstShapeSymbols = GetSymbolsByCount(
+            firstShapeCount,
+            primarySymbol
+        );
+        let secondShapeSymbols = GetSymbolsByCount(
+            secondShapeCount,
+            primarySymbol
+        );
+        let thirdShapeSymbols = GetSymbolsByCount(
+            thirdShapeCount,
+            primarySymbol
+        );
+        let firstGapSymbols = GetSymbolsByCount(firstGapsCount, gapSymbol);
+        let secondGapSymbolos = GetSymbolsByCount(secondGapsCount, gapSymbol);
+
+        console.log(
+            firstShapeSymbols,
+            firstGapSymbols,
+            secondShapeSymbols,
+            secondGapSymbolos,
+            thirdShapeSymbols
+        );
+    }
 }
+
+PrintShapes()
 
 // *         *         *
 // **       ***       ***
