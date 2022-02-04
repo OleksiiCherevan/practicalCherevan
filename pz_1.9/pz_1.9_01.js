@@ -1,4 +1,4 @@
-let MAX_VALUE = 100;
+const MAX_VALUE = 100;
 let simpleNumbers = []
 
 let i = 0;
