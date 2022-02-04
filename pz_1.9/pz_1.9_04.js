@@ -25,23 +25,21 @@ function GetRombCount(count, index) {
     return res;
 }
 
-function PrintShapes(countLevels = 5, spaceBetween = 1, primarySymbol = "*", gapSymbol = " ") {
-    // let countLevels = 10;
-    // const spaceBetween = 5;
-    // const primarySymbol = "*";
-    // const gapSymbol = " ";
+function PrintShapes(
+    _countLevels = 10,
+    spaceBetween = 1,
+    primarySymbol = "*",
+    gapSymbol = " "
+) {
+    let countLevels = _countLevels * 1;
 
-    // const COUNT_SHAPES = 3;
     for (let i = 1; i <= countLevels; i++) {
         let firstShapeFloor = i;
         let secondShapeFloor = i;
         let thirdShapeFloor = i;
 
         let firstGapsCount =
-            countLevels * 2 +
-            spaceBetween -
-            firstShapeFloor -
-            secondShapeFloor;
+            countLevels * 2 + spaceBetween - firstShapeFloor - secondShapeFloor;
 
         let secondGapsCount =
             secondShapeFloor <= GetMediana(countLevels) ?
@@ -53,7 +51,6 @@ function PrintShapes(countLevels = 5, spaceBetween = 1, primarySymbol = "*", gap
 
         let thirdRombCount = GetRombCount(countLevels, thirdShapeFloor);
         let thirdShapeCount = GetFloorLength(thirdRombCount);
-        // let thirdShapeCount = thirdRombCount
 
         let firstShapeSymbols = GetSymbolsByCount(
             firstShapeCount,
@@ -80,7 +77,24 @@ function PrintShapes(countLevels = 5, spaceBetween = 1, primarySymbol = "*", gap
     }
 }
 
-PrintShapes()
+const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+readline.question("Оберiть кiлькiсть поверхiв: ", (count) => {
+    let levels = count * 1;
+
+    if (!isNaN(levels)) {
+        console.log(`Kiлькiсть поверхiв:! ${levels}`);
+        console.log();
+        PrintShapes(levels, 1, '*', ' ');
+    } else {
+        console.log("Дивне число...");
+    }
+
+    readline.close();
+});
 
 // *         *         *
 // **       ***       ***
