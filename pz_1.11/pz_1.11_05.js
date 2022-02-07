@@ -36,4 +36,5 @@ let PrintInfoAboutNumber = (number) => {
     console.log(divideInfo);
 }
 
+
 PrintInfoAboutNumber(10);
