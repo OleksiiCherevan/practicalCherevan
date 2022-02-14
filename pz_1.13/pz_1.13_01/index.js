@@ -37,7 +37,7 @@ const DAY_BY_NUMBER = {
 
 
 
-const GetSpeciaWordFromPrompt = (
+const GetWordFromPrompt = (
     firstAttempt,
     secondAttempt,
     isCorrectPredicate
@@ -53,13 +53,13 @@ const GetSpeciaWordFromPrompt = (
     return specialWord;
 };
 
-let language = GetSpeciaWordFromPrompt(
+let language = GetWordFromPrompt(
     ASK_LANGUAGE_FIRST,
     ASK_LANGUAGE_SECOND,
     language => language == "ua" || language == "en"
 );
 
-let dayOfWeek = GetSpeciaWordFromPrompt(
+let dayOfWeek = GetWordFromPrompt(
     ASK_BY_LANGUAGE[language].firstAttempt,
     ASK_BY_LANGUAGE[language].secondAttempt,
     day => day >= 1 && day <= 7
