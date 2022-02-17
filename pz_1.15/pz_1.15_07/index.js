@@ -8,6 +8,10 @@ const VERY_HOT = "VERY_HOT";
 const COLDER = "COLDER";
 const HOTER = "HOTER";
 
+const [YES, NO] = ['yes', 'no']
+
+const [VERY_HOT_NUMBER, HOT_NUMBER, COLD_NUMBER, VERY_COLD_NUMBER] = [10, 20, 50 ,75]
+
 const GetCurrentTime = () => {
     let d = new Date();
 
@@ -21,7 +25,7 @@ const Game = () => {
     console.log(`Ask number ${askNumber}`);
     let input = -1;
     let laskInput = -1;
-    let lastTemp = 100;
+    let lastTemp = MAX;
     let attempts = 0;
 
     do {
@@ -30,11 +34,11 @@ const Game = () => {
         let temp = Math.abs(askNumber - input);
         
         let achievemessage =
-        temp < 10
+        temp < VERY_HOT_NUMBER
         ? VERY_HOT
-        : temp < 20
+        : temp < HOT_NUMBER
         ? HOT
-        : temp < 50
+        : temp < COLD_NUMBER
         ? COLD
         : VERY_COLD;
         
@@ -57,8 +61,8 @@ const Game = () => {
     alert(`Congratulation! за 10 спроб ви вгадали число ${askNumber}`);
 };
 
-let answer = "no";
+let answer = NO;
 do {
     Game();
-    answer = prompt(" Do you want to play more? yes or no");
-} while ("yes".includes(answer));
+    answer = prompt("Do you want to play more? yes or no");
+} while (YES.includes(answer));
